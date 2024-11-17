@@ -5,84 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../output.css">
     <title>ColorCraft: Dynamic Palette Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=nights_stay" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.4.2/chroma.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 </head>
 <body>
     <div class="flex h-[80px] w-screen justify-between items-center shadow px-9">
-        <a href="../index.html" class="font-bold text-4xl no-underline text-black cursor-pointer">ColorCraft</a>
-        <img src="crescent.png" alt="darkLightModeIcon" class="p-2 rounded-xl border-2 border-black w-[50px] cursor-pointer">
+        <a href="../index.html" class="font-bold text-4xl no-underline text-black cursor-pointer white blackbd max-ssm:text-[22px]">ColorCraft</a>
+        <div class="flex relative">
+            <p class="absolute p-3 right-[115px] text-[16px] bg-red-300 rounded-full">0</p>
+            <img src="white.png" class="p-2 w-[50px] cursor-pointer hidden" alt="favourite" id="favourite1">
+            <img src="black.png" class="p-2 w-[50px] cursor-pointer block" alt="favourite" id="favourite2">
+            <span class="material-symbols-outlined p-2 ml-6 rounded-xl border-2 border-black w-[50px] cursor-pointer" id="dark">nights_stay</span> 
+        </div>
     </div>
-    <div class="flex">
-        <div class="w-[30%] flex flex-col items-center pt-6 border-r-[1px] border-black" id="mypicker">
+    <div class="flex max-sm:flex-col max-sm:items-center">
+        <div class="w-[30%] flex flex-col items-center pt-6 border-r-[1px] border-black blackbd max-sm:w-full max-sm:flex-col-reverse" id="mypicker">
             <div id="picker"></div>
             <div class="w-[90%] p-5">
-                <div class="flex items-center pb-2">
-                    <span class="font-medium text-2xl pr-5">HEX:</span>
-                    <span id="hex" class="font-medium text-2xl"></span>
+                <div class="flex items-center pb-2 whiteness">
+                    <span class="font-medium text-2xl pr-5 max-md:text-lg">HEX:</span>
+                    <span id="hex" class="font-medium text-2xl max-md:text-lg"></span>
                 </div>
-                <div class="flex items-center pb-2">
-                    <span class="font-medium text-2xl pr-5">RGB:</span>
-                    <span id="rgb" class="font-medium text-2xl"> </span>
+                <div class="flex items-center pb-2 whiteness">
+                    <span class="font-medium text-2xl pr-5 max-md:text-lg">RGB:</span>
+                    <span id="rgb" class="font-medium text-2xl max-md:text-lg"> </span>
                 </div>
-                <div class="flex items-center pb-2">
-                    <span class="font-medium text-2xl pr-5">HSL:</span>
-                    <span id="hsl" class="font-medium text-2xl"></span>
+                <div class="flex items-center pb-2 whiteness">
+                    <span class="font-medium text-2xl pr-5 max-md:text-lg">HSL:</span>
+                    <span id="hsl" class="font-medium text-2xl max-md:text-lg"></span>
                 </div>
             </div>
             <div class="w-[90%] px-5 pb-5">
-                <h1 class="pb-2 font-bold text-3xl">Select the type of color</h1>
-                <select id="selection" class="w-4/5 p-2 rounded-xl border-2 border-black text-2xl">
-                    <option value="rgba">rgba</option>
-                    <option value="hex">hex</option>
-                    <option value="hsla">hsla</option>
+                <h1 class="pb-2 font-bold text-3xl white">Select the type of color</h1>
+                <select id="selection" class="w-4/5 p-2 rounded-xl border-2 border-black text-2xl white blackbg blackbd max-md:text-lg">
+                    <option value="rgba" class="white blackbg">rgba</option>
+                    <option value="hex" class="white blackbg">hex</option>
+                    <option value="hsla" class="white blackbg">hsla</option>
                 </select>
-                <div class="w-[90%] pt-8">
+                <div class="w-[90%] pt-8 max-sm:pt-2">
                     <div id="rgbacolor" class="flex justify-between flex-wrap flex-row">
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">r</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color1">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg max-md:text-lg">r</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color1">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-259</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">g</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color2">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">g</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color2">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-259</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">b</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color3">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">b</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color3">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-259</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">a <span class="text-[14px]">(Opt)</span></h1>
-                            <input type="number" class="w-full  p-2 border-2 border-black rounded-lg colorsforhover" id="alpha1">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">a(Opt)</h1>
+                            <input type="number" class="w-full  p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="alpha1">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-1</div>
                         </div>
                     </div>
                     <div id="hexcolor" class="hidden justify-between flex-wrap flex-row">
-                        <p class="text-2xl font-semibold">Enter Your HEX Code</p>
-                        <input type="text" class="w-full p-2 border-2 border-black rounded-lg" placeholder="eg. #ffffff" id="colorhex">
+                        <p class="text-2xl font-semibold white max-md:text-lg">Enter Your HEX Code</p>
+                        <input type="text" class="w-full p-2 border-2 border-black rounded-lg white blackbg blackbd" placeholder="eg. #ffffff" id="colorhex">
                     </div>
                     <div id="hslacolor" class="hidden justify-between flex-wrap flex-row">
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">h</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color4">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">h</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color4">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-359</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">s</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color5">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">s</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color5">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-100</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">l</h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="color6">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">l</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="color6">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-100</div>
                         </div>
                         <div class="flex flex-col w-1/5 items-center relative">
-                            <h1 class="font-semibold text-2xl pb-2">a <span class="text-[14px]">(Opt)</span></h1>
-                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover" id="alpha2">
+                            <h1 class="font-semibold text-2xl pb-2 white max-md:text-lg">a(Opt)</h1>
+                            <input type="number" class="w-full p-2 border-2 border-black rounded-lg colorsforhover white blackbg blackbd" id="alpha2">
                             <div class="absolute h-[40px] w-[120%] top-20 bg-red-300 z-1 items-center justify-center hidden">0-1</div>
                         </div>
                     </div>
@@ -90,12 +96,12 @@
                 <button id="submit" class="bg-blue-500 text-white w-max text-2xl px-4 py-2 mt-4 rounded-md max-lg:text-xl max-md:text-[16px] max-ssm:text-[14px]">Submit</button>
             </div>
         </div>
-        <div class="w-[70%] flex flex-col items-center p-10">
-            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0" id="palette1"></div>
-            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0" id="palette2"></div>
-            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0" id="palette3"></div>
-            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0" id="palette4"></div>
-            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0" id="palette5"></div>
+        <div class="w-[70%] flex flex-col items-center p-10 max-sm:w-full">
+            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0 blackbd max-sm:h-20" id="palette1"></div>
+            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0 blackbd max-sm:h-20" id="palette2"></div>
+            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0 blackbd max-sm:h-20" id="palette3"></div>
+            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0 blackbd max-sm:h-20" id="palette4"></div>
+            <div class="palettes w-full h-1/5 flex justify-center items-center border-2 border-black rounded-xl mb-4 relative z-0 blackbd max-sm:h-20" id="palette5"></div>
         </div>
     </div>
 <script src="script.js"></script>

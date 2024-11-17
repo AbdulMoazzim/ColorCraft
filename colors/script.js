@@ -231,7 +231,7 @@ function display(myhex) {
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
     colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg">${rgbaAndHsl[0]}</h1><h1 class="text-lg">hex: ${color}</h1><h1 class="text-lg">${rgbaAndHsl[1]}</h1> 
+    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
     </div>`
     container1.appendChild(colorBlock);
   });
@@ -246,7 +246,7 @@ function display(myhex) {
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
     colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg">${rgbaAndHsl[0]}</h1><h1 class="text-lg">hex: ${color}</h1><h1 class="text-lg">${rgbaAndHsl[1]}</h1> 
+    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
     </div>`
     container2.appendChild(colorBlock);
   });
@@ -261,7 +261,7 @@ function display(myhex) {
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
     colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg">${rgbaAndHsl[0]}</h1><h1 class="text-lg">hex: ${color}</h1><h1 class="text-lg">${rgbaAndHsl[1]}</h1> 
+    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
     </div>`
     container3.appendChild(colorBlock);
   });
@@ -276,7 +276,7 @@ function display(myhex) {
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
     colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg">${rgbaAndHsl[0]}</h1><h1 class="text-lg">hex: ${color}</h1><h1 class="text-lg">${rgbaAndHsl[1]}</h1> 
+    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
     </div>`
     container4.appendChild(colorBlock);
   });
@@ -289,8 +289,8 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg">${rgbaAndHsl[0]}</h1><h1 class="text-lg">hex: ${color}</h1><h1 class="text-lg">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
+    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
     </div>`
     container5.appendChild(colorBlock);
   });
@@ -336,5 +336,82 @@ colorPicker.on("color:change", ()=>{
   events();
 });
 
+
 display("#ffffff");
 events()
+
+// darkMode
+let darkMode = document.querySelector("#dark");
+let child1 = document.querySelectorAll(".whiteness");
+let child2 = document.querySelectorAll(".white");
+let child3 = document.querySelectorAll(".blackbg");
+let child4 = document.querySelectorAll(".blackbd");
+
+let storage = localStorage;
+
+function dark1() {
+  document.querySelector("body").classList.remove("bg-[#2b343c]");
+    darkMode.classList.remove("border-white")
+    darkMode.classList.add("border-black")
+    darkMode.style.color = "black";
+    child2.forEach((val)=>{
+      val.style.color = "black";
+    })
+    child3.forEach((val)=>{
+      val.style.backgroundColor = "white";
+    })
+    child1.forEach((val)=>{
+      Array.from(val.children).forEach((myval)=>{
+        myval.style.color = "black";
+      })
+    })
+    child4.forEach((val)=>{
+      val.classList.remove("border-white");
+      val.classList.add("border-black");
+    })
+    document.querySelector("#favourite2").classList.remove("hidden");
+    document.querySelector("#favourite1").classList.add("hidden");
+}
+function dark2() {
+  document.querySelector("body").classList.add("bg-[#2b343c]");
+    darkMode.classList.remove("border-black")
+    darkMode.classList.add("border-white")
+    darkMode.style.color = "white";
+    child1.forEach((val)=>{
+      Array.from(val.children).forEach((myval)=>{
+        myval.style.color = "white";
+      })
+    })
+    child2.forEach((val)=>{
+      val.style.color = "white";
+    })
+    child3.forEach((val)=>{
+      val.style.backgroundColor = "#2b343c";
+    })
+    child4.forEach((val)=>{
+      val.classList.remove("border-black");
+      val.classList.add("border-white");
+    })
+    document.querySelector("#favourite1").classList.remove("hidden");
+    document.querySelector("#favourite2").classList.add("hidden");
+}
+
+
+if (JSON.parse(storage.getItem("val")) === 0) {
+  dark1();
+} else {
+  dark2()
+}
+
+darkMode.addEventListener('click',()=>{
+  if (JSON.parse(storage.getItem("val")) === 1){
+    storage.setItem("val",JSON.stringify(0));
+    dark1();
+  }
+  else {
+    storage.setItem("val",JSON.stringify(1));
+    dark2();
+  }
+})
+
+
