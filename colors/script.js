@@ -146,6 +146,7 @@ const container2 = document.getElementById("palette2");
 const container3 = document.getElementById("palette3");
 const container4 = document.getElementById("palette4");
 const container5 = document.getElementById("palette5");
+let palettes = document.querySelectorAll(".palettes");
 
 // Conversion of hex o hsl and rgba
 
@@ -230,8 +231,8 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
+    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
     </div>`
     container1.appendChild(colorBlock);
   });
@@ -245,8 +246,8 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
+    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
     </div>`
     container2.appendChild(colorBlock);
   });
@@ -260,8 +261,8 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
+    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
     </div>`
     container3.appendChild(colorBlock);
   });
@@ -275,8 +276,8 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-4/5 bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
+    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
     </div>`
     container4.appendChild(colorBlock);
   });
@@ -289,12 +290,11 @@ function display(myhex) {
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
     let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5">
-    <h1 class="text-lg max-md:text-sm">${rgbaAndHsl[0]}</h1><h1 class="text-lg max-md:text-sm">hex: ${color}</h1><h1 class="text-lg max-md:text-sm">${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
+    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
     </div>`
     container5.appendChild(colorBlock);
   });
-  let palettes = document.querySelectorAll(".palettes");
   palettes.forEach((val)=>{
     val.childNodes[0].style.borderRadius = "0.75rem 0 0 0.75rem";
     val.childNodes[palettes.length].style.borderRadius = "0 0.75rem 0.75rem 0";
@@ -306,14 +306,12 @@ function events() {
   let palettes = document.querySelectorAll(".colorBlock");
   
   palettes.forEach((val)=>{
-    console.log("Hi")
       val.addEventListener("mousemove",()=>{
         val.children[0].classList.add("flex");
         val.children[0].classList.remove("hidden");
     })
   })
   palettes.forEach((val)=>{
-    console.log("Bye")
       val.addEventListener("mouseleave",()=>{
         val.children[0].classList.add("hidden");
         val.children[0].classList.remove("flex");
@@ -414,4 +412,31 @@ darkMode.addEventListener('click',()=>{
   }
 })
 
+// Storing palettes
+let colorcode;
+palettes.forEach((val) => {
+  val.addEventListener("click", () => {
+    const colorsArray = Array.from(val.children).map(child => child.textContent || child.innerText);
+    if (localStorage.getItem("colors") === null) {
+      colorcode = [colorsArray];
+      localStorage.setItem("colors", JSON.stringify(colorcode));
+    } else {
+      colorcode = JSON.parse(localStorage.getItem("colors"));
+      const isDuplicate = colorcode.some(palette => 
+        JSON.stringify(palette) === JSON.stringify(colorsArray)
+      );
 
+      if (!isDuplicate) {
+        colorcode.push(colorsArray);
+        localStorage.setItem("colors", JSON.stringify(colorcode));
+      }
+    }
+    document.querySelector(".count").innerHTML = JSON.parse(localStorage.getItem("colors")).length;
+  });
+});
+if (JSON.parse(localStorage.getItem("colors")) === null) {
+  document.querySelector(".count").innerHTML = 0;
+}
+else {
+  document.querySelector(".count").innerHTML = JSON.parse(localStorage.getItem("colors")).length;
+}

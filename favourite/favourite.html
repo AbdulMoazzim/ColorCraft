@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../output.css">
+    <title>ColorCraft: Dynamic Palette Generator</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=nights_stay" />
+</head>
+<body>
+    <div class="flex h-[80px] w-screen justify-between items-center shadow px-9">
+        <a href="../index.html" class="font-bold text-4xl no-underline text-black cursor-pointer white blackbd max-ssm:text-[22px]">ColorCraft</a>
+        <div class="flex relative">
+            <p class="absolute p-3 right-[115px] text-[16px] bg-red-300 rounded-full count"></p>
+            <a href="../colors/colors.html"><img src="../images/white.png" class="p-2 w-[50px] cursor-pointer hidden" alt="favourite" id="favourite1">
+            <img src="../images/black.png" class="p-2 w-[50px] cursor-pointer block" alt="favourite" id="favourite2"></a>
+            <span class="material-symbols-outlined p-2 ml-6 rounded-xl border-2 border-black w-[50px] cursor-pointer" id="dark">nights_stay</span> 
+        </div>
+    </div>
+    <main class="p-7 w-full h-full" id="mainContent"></main>
+<script src="favourite.js"></script>
+</body>
+</html>
