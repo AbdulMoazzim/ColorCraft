@@ -87,7 +87,7 @@ function display(values) {
   }
   else {
     main.innerHTML = `
-    <div class="flex justify-between items-center my-5"><h1 class="text-4xl font-bold head max-md:text-xl max-ssm:text-[18px]">Palettes You Chose!</h1><button class="bg-blue-500 text-white text-2xl px-4 py-2 rounded-md max-lg:text-xl  max-ssm:text-[14px]">Download the pdf</button></div>`;
+    <div class="flex justify-between items-center my-5"><h1 class="text-4xl font-bold head max-md:text-xl max-ssm:text-[18px]">Palettes You Chose!</h1><button class="bg-blue-500 text-white text-2xl px-4 py-2 rounded-md max-lg:text-xl  max-ssm:text-[14px]" id="generatePDF">Download the pdf</button></div>`;
     arr.forEach((val,index)=>{
         main.innerHTML += div;                                                                                                                                   
         arr[index].forEach(()=>{
@@ -115,8 +115,105 @@ function display(values) {
   } else {
     dark2()
   }
+
+  function extractColors(input) {
+    const rgbaMatch = input.match(/rgba\([^)]*\)/);
+    const hexMatch = input.match(/#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})/);
+    const hslMatch = input.match(/hsl\([^)]*\)/);
   
-    //bin feature 
+    const colors = {
+      RGBA: rgbaMatch ? rgbaMatch[0] : null,
+      HEX: hexMatch ? hexMatch[0] : null,
+      HSL: null, 
+    };
+  
+    if (hslMatch) {
+      const hslComponents = hslMatch[0]
+        .replace(/hsl\(|\)/g, "") 
+        .split(",")
+        .map((x) => parseFloat(x.trim())); 
+  
+      if (!isNaN(hslComponents[0])) {
+        colors.HSL = hslMatch[0];
+      }
+    }
+  
+    Object.keys(colors).forEach((key) => {
+      if (!colors[key]) delete colors[key];
+    });
+  
+    return colors;
+  }
+  //pdf feature
+  let mydiv = ""; 
+  let mydate = new Date();
+  mycolors.forEach((val,ind) => {
+    let html = "";
+    val.forEach((myval, index) => {
+      const result = extractColors(myval);
+
+      if (Object.keys(result).length === 3) {
+        html += `
+          <h4>Color ${index + 1}</h4>
+          <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="width: 50px; height: 50px; background-color: ${result.HEX}; border: 1px solid #ccc; margin-right: 10px;"></div>
+            <div style="display: flex; align-items: center; flex-wrap: wrap;">
+              <p style="font-size: 14px; margin-right: 20px">RGBA Code: <strong>${result.RGBA}</strong></p>
+              <p style="font-size: 14px; margin-right: 20px">HEX Code: <strong>${result.HEX}</strong></p>
+              <p style="font-size: 14px; margin-right: 20px">HSL Code: <strong>${result.HSL}</strong></p>
+            </div>
+          </div>`;
+      }
+      else {
+        html += `
+          <h4>Color ${index + 1}</h4>
+          <div style="display: flex; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
+            <div style="width: 50px; height: 50px; background-color: ${result.HEX}; border: 1px solid #ccc; margin-right: 10px;"></div>
+            <div style="display: flex; align-items: center; flex-wrap: wrap;">
+              <p style="font-size: 14px; margin-right: 20px">RGBA Code: <strong>${result.RGBA}</strong></p>
+              <p style="font-size: 14px; margin-right: 20px">HEX Code: <strong>${result.HEX}</strong></p>
+            </div>
+          </div>`;
+      }
+    });
+    mydiv += `<div style="margin: 30px 0"><h1 style="font-weight: 700; font-size: 22px;">Palette ${ind+1}</h1>${html}</div><hr>`;
+  });
+  
+  const html1 = `
+  <div id="pdfContent" style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+    <h1 style="text-align: center; font-weight: 700; font-size: 22px;">ColorCraft</h1>
+    <p style="text-align: center;">Generated on: ${mydate.toLocaleString()}</p>
+    
+    <h3 style="margin-top: 20px;">Palette Overview</h3>
+    <div id="dispalycolor">
+      ${mydiv}
+    </div>
+    
+    <h3 style="margin-top: 20px;">Usage Tips:</h3>
+    <p>
+      This color palette is perfect for creating a warm, energetic website or app interface. The analogous colors blend harmoniously.
+    </p>
+    
+    <footer style="margin-top: 30px; text-align: center; font-size: 0.9em; color: #666;">
+      <p>Generated with <strong>ColorCraft</strong> – <a href="https://www.colorcraftapp.com" target="_blank">www.colorcraftapp.com</a></p>
+      <p>For more palettes, visit our website!</p>
+    </footer>
+  </div>`;
+  
+  document.querySelector("#generatePDF").addEventListener("click", () => {
+    const options = {
+      margin: 1,
+      filename: "Custom_Color_Palette.pdf",
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+  
+    html2pdf().set(options).from(html1).save();
+  });
+  
+
+
+  //bin feature 
     let bins = document.querySelectorAll(".bins");
     bins.forEach((val, index) => {
       val.addEventListener("click", () => {
@@ -129,6 +226,4 @@ function display(values) {
 }
 
 display(JSON.parse(storage.getItem("colors")))
-
-
 

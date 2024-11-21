@@ -1,5 +1,6 @@
 let colorPicker = new iro.ColorPicker("#picker", {
-    width: (window.outerWidth * 20 / 100)
+    width: (window.outerWidth * 20 / 100),
+    color: "#f00"
 });
 let hex = document.querySelector("#hex");
 let rgb = document.querySelector("#rgb");
