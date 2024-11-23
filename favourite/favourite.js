@@ -181,7 +181,7 @@ function display(values) {
     </p>
     
     <footer style="margin-top: 30px; text-align: center; font-size: 0.9em; color: #666;">
-      <p style="margin-bottom:15px">Generated with <strong>ColorCraft</strong> – <a href="https://mycolorcraft.netlify.app/" target="_blank" style="color: rgb(59 130 246)">www.colorcraftapp.com</a></p>
+      <p style="margin-bottom:15px">Generated with <strong>ColorCraft</strong> – <a href="https://mycolorcraft.netlify.app/" target="_blank" style="color: rgb(59 130 246)">www.mycolorcraft.netlify.app</a></p>
       <p style="margin-bottom:15px">For more palettes, visit our website!</p>
     </footer>
   </div>`;
@@ -189,7 +189,7 @@ function display(values) {
   document.querySelector("#generatePDF").addEventListener("click", () => {
     const options = {
       margin: 1,
-      filename: "Custom_Color_Palette.pdf",
+      filename: "Color_Palette.pdf",
       html2canvas: { scale: 2 },
       jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
     };

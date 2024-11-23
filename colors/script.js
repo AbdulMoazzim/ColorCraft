@@ -66,7 +66,6 @@ colorsinput.forEach((val)=>{
 })
 
 // Input Fields Validation
-
 document.querySelector("#submit").addEventListener("click", () => {
   const isValidRange = (value, min, max) => {
     return value !== "" && Number(value) >= min && Number(value) <= max;
