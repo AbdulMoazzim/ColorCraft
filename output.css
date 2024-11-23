@@ -582,22 +582,18 @@ video {
   z-index: 10;
 }
 
-.my-3 {
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
 }
 
-.mb-12 {
-  margin-bottom: 3rem;
+.my-14 {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
 }
 
-.mb-7 {
-  margin-bottom: 1.75rem;
+.mb-12 {
+  margin-bottom: 3rem;
 }
 
 .ml-6 {
@@ -606,6 +602,10 @@ video {
 
 .mt-4 {
   margin-top: 1rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
 }
 
 .block {
@@ -678,6 +678,10 @@ video {
 
 .w-\[120\%\] {
   width: 120%;
+}
+
+.w-\[150\%\] {
+  width: 150%;
 }
 
 .w-\[16\.66\%\] {
@@ -779,6 +783,10 @@ video {
 
 .rounded-xl {
   border-radius: 0.75rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-2 {
@@ -1280,6 +1288,10 @@ video {
     position: absolute;
   }
 
+  .max-sm\:top-10 {
+    top: 2.5rem;
+  }
+
   .max-sm\:z-0 {
     z-index: 0;
   }
@@ -1334,12 +1346,20 @@ video {
 }
 
 @media (max-width: 450px) {
+  .max-ssm\:top-10 {
+    top: 2.5rem;
+  }
+
   .max-ssm\:h-\[90\%\] {
     height: 90%;
   }
 
   .max-ssm\:justify-end {
     justify-content: flex-end;
+  }
+
+  .max-ssm\:p-1 {
+    padding: 0.25rem;
   }
 
   .max-ssm\:text-\[12px\] {
@@ -1350,6 +1370,10 @@ video {
     font-size: 14px;
   }
 
+  .max-ssm\:text-\[18px\] {
+    font-size: 18px;
+  }
+
   .max-ssm\:text-\[20px\] {
     font-size: 20px;
   }
@@ -1358,11 +1382,15 @@ video {
     font-size: 22px;
   }
 
-  .max-ssm\:text-\[1px\] {
-    font-size: 1px;
+  .max-ssm\:text-\[10px\] {
+    font-size: 10px;
   }
 
-  .max-ssm\:text-\[18px\] {
-    font-size: 18px;
+  .max-ssm\:text-\[8px\] {
+    font-size: 8px;
+  }
+
+  .max-ssm\:text-\[px\] {
+    color: px;
   }
 }

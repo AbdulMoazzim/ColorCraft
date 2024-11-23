@@ -1,9 +1,37 @@
 let storage = localStorage;
 
+function mycolorConversion(rgb) {
+  const HEXColor = chroma(rgb).hex(); 
+  const hslColor = chroma(rgb).hsl(); 
+
+  if (isNaN(hslColor[0])) {
+    return [HEXColor, null]; 
+  }
+
+  const hslString = `hsl(${Math.round(hslColor[0])}, ${Math.round(hslColor[1] * 100)}%, ${Math.round(hslColor[2] * 100)}%)`;
+  return [HEXColor, hslString];
+}
+
+// Extract colors from input
+function extractColors(rgb) {
+  const codes = mycolorConversion(rgb); 
+
+  const colors = {
+    HEX: codes[0],
+    RGB: rgb,
+  };
+
+  if (codes[1]) {
+    colors.HSL = codes[1];
+  }
+
+  return colors;
+}
+
+
 // darkMode
 let darkMode = document.querySelector("#dark");
 let child2 = document.querySelectorAll(".white");
-let child4 = document.querySelectorAll(".blackbd");
 
 
 function dark1() {
@@ -13,10 +41,6 @@ function dark1() {
     darkMode.style.color = "black";
     child2.forEach((val)=>{
       val.style.color = "black";
-    })
-    child4.forEach((val)=>{
-      val.classList.remove("border-white");
-      val.classList.add("border-black");
     })
     document.querySelector("#favourite2").classList.remove("hidden");
     document.querySelector("#favourite1").classList.add("hidden");
@@ -37,10 +61,6 @@ function dark2() {
     darkMode.style.color = "white";
     child2.forEach((val)=>{
       val.style.color = "white";
-    })
-    child4.forEach((val)=>{
-      val.classList.remove("border-black");
-      val.classList.add("border-white");
     })
     document.querySelector("#favourite1").classList.remove("hidden");
     document.querySelector("#favourite2").classList.add("hidden");
@@ -66,19 +86,11 @@ darkMode.addEventListener('click',()=>{
   }
 })
 
-
 //displaying Content
-
 function display(values) {
-  let div = `<div class="w-full"><div class="flex justify-end items-center"><img src="../images/binblack.png" class="w-8 binblack bins"><img src="../images/binwhite.png" class="w-8 binwhite bins"></div><div class="palettes w-full h-[200px] flex justify-center mb-12 items-center border-2 border-black rounded-xl blackbd max-sm:h-20 max-sm:mb-14" id="palette1"></div></div>` 
+  let div = `<div class="w-full"><div class="flex justify-end items-center"><img src="../images/binblack.png" class="w-8 binblack bins"><img src="../images/binwhite.png" class="w-8 binwhite bins"></div><div class="palettes w-full h-[200px] flex justify-center mb-12 items-center border-2 rounded-xl max-sm:h-20 max-sm:mb-14" id="palette1"></div></div>` 
   let msg = `<h1 class="text-center text-3xl head max-md:text-xl max-ssm:text-[18px]">Sorry, you didn't select any palettes</h1>`;
   let mycolors = values;
-  
-  let arr = mycolors.map((val)=>{
-  return val.map((myval)=>{
-    return myval.split(":")[2]
-  })
-  })
   
   let main = document.querySelector("#mainContent");
   main.innerHTML = ""
@@ -87,10 +99,10 @@ function display(values) {
   }
   else {
     main.innerHTML = `
-    <div class="flex justify-between items-center my-5"><h1 class="text-4xl font-bold head max-md:text-xl max-ssm:text-[18px]">Palettes You Chose!</h1><button class="bg-blue-500 text-white text-2xl px-4 py-2 rounded-md max-lg:text-xl  max-ssm:text-[14px]" id="generatePDF">Download the pdf</button></div>`;
-    arr.forEach((val,index)=>{
+    <div class="flex justify-between items-center flex-wrap"><h1 class="text-4xl font-bold my-5 head max-md:text-xl max-ssm:text-[18px]">Palettes You Chose!</h1><button class="bg-blue-500 text-white text-2xl px-4 py-2 my-5 rounded-md max-lg:text-xl  max-ssm:text-[14px]" id="generatePDF">Download the pdf</button></div>`;
+    mycolors.forEach((val,index)=>{
         main.innerHTML += div;                                                                                                                                   
-        arr[index].forEach(()=>{
+        val.forEach(()=>{
           main.children[index+1].children[1].innerHTML +=  `<div class="w-[16.66%] h-full"></div>`
         })
     })
@@ -98,7 +110,7 @@ function display(values) {
   let palettes = document.querySelectorAll(".palettes");
   palettes.forEach((val,ind)=>{
     Array.from(val.children).forEach((val,index)=>{
-      val.style.backgroundColor = arr[ind][index]
+      val.style.backgroundColor = mycolors[ind][index]
     })
     val.childNodes[0].style.borderRadius = "0.75rem 0 0 0.75rem";
     val.childNodes[val.children.length-1].style.borderRadius = "0 0.75rem 0.75rem 0";
@@ -116,34 +128,7 @@ function display(values) {
     dark2()
   }
 
-  function extractColors(input) {
-    const rgbaMatch = input.match(/rgba\([^)]*\)/);
-    const hexMatch = input.match(/#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})/);
-    const hslMatch = input.match(/hsl\([^)]*\)/);
-  
-    const colors = {
-      RGBA: rgbaMatch ? rgbaMatch[0] : null,
-      HEX: hexMatch ? hexMatch[0] : null,
-      HSL: null, 
-    };
-  
-    if (hslMatch) {
-      const hslComponents = hslMatch[0]
-        .replace(/hsl\(|\)/g, "") 
-        .split(",")
-        .map((x) => parseFloat(x.trim())); 
-  
-      if (!isNaN(hslComponents[0])) {
-        colors.HSL = hslMatch[0];
-      }
-    }
-  
-    Object.keys(colors).forEach((key) => {
-      if (!colors[key]) delete colors[key];
-    });
-  
-    return colors;
-  }
+
   //pdf feature
   let mydiv = ""; 
   let mydate = new Date();
@@ -151,6 +136,7 @@ function display(values) {
     let html = "";
     val.forEach((myval, index) => {
       const result = extractColors(myval);
+      console.log(result)
 
       if (Object.keys(result).length === 3) {
         html += `
@@ -158,7 +144,7 @@ function display(values) {
           <div style="display: flex; align-items: center; margin-bottom: 10px;">
             <div style="width: 50px; height: 50px; background-color: ${result.HEX}; border: 1px solid #ccc; margin-right: 10px;"></div>
             <div style="display: flex; align-items: center; flex-wrap: wrap;">
-              <p style="font-size: 14px; margin-right: 20px">RGBA Code: <strong>${result.RGBA}</strong></p>
+              <p style="font-size: 14px; margin-right: 20px">RGB Code: <strong>${result.RGB}</strong></p>
               <p style="font-size: 14px; margin-right: 20px">HEX Code: <strong>${result.HEX}</strong></p>
               <p style="font-size: 14px; margin-right: 20px">HSL Code: <strong>${result.HSL}</strong></p>
             </div>
@@ -170,7 +156,7 @@ function display(values) {
           <div style="display: flex; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
             <div style="width: 50px; height: 50px; background-color: ${result.HEX}; border: 1px solid #ccc; margin-right: 10px;"></div>
             <div style="display: flex; align-items: center; flex-wrap: wrap;">
-              <p style="font-size: 14px; margin-right: 20px">RGBA Code: <strong>${result.RGBA}</strong></p>
+              <p style="font-size: 14px; margin-right: 20px">RGB Code: <strong>${result.RGB}</strong></p>
               <p style="font-size: 14px; margin-right: 20px">HEX Code: <strong>${result.HEX}</strong></p>
             </div>
           </div>`;
@@ -195,8 +181,8 @@ function display(values) {
     </p>
     
     <footer style="margin-top: 30px; text-align: center; font-size: 0.9em; color: #666;">
-      <p>Generated with <strong>ColorCraft</strong> – <a href="https://www.colorcraftapp.com" target="_blank">www.colorcraftapp.com</a></p>
-      <p>For more palettes, visit our website!</p>
+      <p style="margin-bottom:15px">Generated with <strong>ColorCraft</strong> – <a href="https://mycolorcraft.netlify.app/" target="_blank" style="color: rgb(59 130 246)">www.colorcraftapp.com</a></p>
+      <p style="margin-bottom:15px">For more palettes, visit our website!</p>
     </footer>
   </div>`;
   

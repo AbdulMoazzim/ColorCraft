@@ -1,6 +1,5 @@
 let colorPicker = new iro.ColorPicker("#picker", {
-    width: (window.outerWidth * 20 / 100),
-    color: "#f00"
+    width: (window.outerWidth * 20 / 100)
 });
 let hex = document.querySelector("#hex");
 let rgb = document.querySelector("#rgb");
@@ -149,17 +148,6 @@ const container4 = document.getElementById("palette4");
 const container5 = document.getElementById("palette5");
 let palettes = document.querySelectorAll(".palettes");
 
-// Conversion of hex o hsl and rgba
-
-function mycolorConversion(hexColor){
-  const rgbaColor = chroma(hexColor).rgba();
-  const rgbaString = `rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${rgbaColor[3]})`;
-
-  const hslColor = chroma(hexColor).hsl();
-  const hslString = `hsl(${Math.round(hslColor[0])}, ${Math.round(hslColor[1] * 100)}%, ${Math.round(hslColor[2] * 100)}%)`;
-  return [rgbaString, hslString]
-}
-
 // palette Creation
 
 function display(myhex) {
@@ -231,9 +219,8 @@ function display(myhex) {
     colorBlock.style.backgroundColor = color;
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
-    let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
-    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-20 w-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2 max-sm:top-10 max-ssm:p-1">
+    <h1 class="text-sm max-sm:text-[12px] max-ssm:text-[8px]">hex: ${color}</h1>
     </div>`
     container1.appendChild(colorBlock);
   });
@@ -246,9 +233,8 @@ function display(myhex) {
     colorBlock.style.backgroundColor = color;
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
-    let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
-    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-20 w-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2 max-sm:top-10 max-ssm:p-1">
+    <h1 class="text-sm max-sm:text-[12px] max-ssm:text-[8px]">hex: ${color}</h1>
     </div>`
     container2.appendChild(colorBlock);
   });
@@ -261,9 +247,8 @@ function display(myhex) {
     colorBlock.style.backgroundColor = color;
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
-    let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
-    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-20 w-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2 max-sm:top-10 max-ssm:p-1">
+    <h1 class="text-sm max-sm:text-[12px] max-ssm:text-[8px]">hex: ${color}</h1>
     </div>`
     container3.appendChild(colorBlock);
   });
@@ -276,9 +261,8 @@ function display(myhex) {
     colorBlock.style.backgroundColor = color;
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
-    let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
-    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-20 w-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2 max-sm:top-10 max-ssm:p-1">
+    <h1 class="text-sm max-sm:text-[12px] max-ssm:text-[8px]">hex: ${color}</h1>
     </div>`
     container4.appendChild(colorBlock);
   });
@@ -290,9 +274,8 @@ function display(myhex) {
     colorBlock.style.backgroundColor = color;
     colorBlock.style.position = "relative";
     colorBlock.style.zIndex = "-1";
-    let rgbaAndHsl = mycolorConversion(color);
-    colorBlock.innerHTML = `<div class="absolute top-10 w-full h-full bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2">
-    <h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[0]}</h1><h1 class="text-sm max-sm:text-[12px]">hex: ${color}</h1><h1 class="text-sm max-sm:text-[12px]">:${rgbaAndHsl[1]}</h1> 
+    colorBlock.innerHTML = `<div class="absolute top-20 w-full  bg-red-300 z-10 items-start justify-center hidden flex-col p-5 max-lg:p-2 max-sm:top-10 max-ssm:p-1">
+    <h1 class="text-sm max-sm:text-[12px] max-ssm:text-[8px]">hex: ${color}</h1>
     </div>`
     container5.appendChild(colorBlock);
   });
@@ -336,7 +319,7 @@ colorPicker.on("color:change", ()=>{
 });
 
 
-display("#ffffff");
+display("#ff0000");
 events()
 
 // darkMode
@@ -417,7 +400,7 @@ darkMode.addEventListener('click',()=>{
 let colorcode;
 palettes.forEach((val) => {
   val.addEventListener("click", () => {
-    const colorsArray = Array.from(val.children).map(child => child.textContent || child.innerText);
+    const colorsArray = Array.from(val.children).map(child => child.style.backgroundColor);
     if (localStorage.getItem("colors") === null) {
       colorcode = [colorsArray];
       localStorage.setItem("colors", JSON.stringify(colorcode));
