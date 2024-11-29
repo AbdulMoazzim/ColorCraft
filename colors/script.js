@@ -9,6 +9,7 @@ let hexcolor = document.querySelector("#hexcolor");
 let rgbcolor = document.querySelector("#rgbacolor");
 let hslcolor = document.querySelector("#hslacolor");
 
+let storage = localStorage;
 // Selection of type of colors
 
 let selection = document.querySelector("#selection");
@@ -65,6 +66,30 @@ colorsinput.forEach((val)=>{
 )
 })
 
+let popup = document.querySelector("#popup");
+function funcForSet(element) {
+  if (JSON.parse(storage.val) === 0) {
+    element.classList.add("border-red-500");
+    element.classList.remove("border-black");
+  } else {
+    element.classList.add("border-red-500");
+    element.classList.remove("border-white");
+  }
+  popup.style.top = "100px";
+}
+function timerFuncForReset(element) {
+  setTimeout(()=>{
+    if (JSON.parse(storage.val) === 1) {
+      element.classList.remove("border-red-500");
+      element.classList.add("border-white");
+    } else {
+      element.classList.remove("border-red-500");
+      element.classList.add("border-black");
+    }
+    popup.style.top = "-60px";
+  },5000)
+}
+
 // Input Fields Validation
 document.querySelector("#submit").addEventListener("click", () => {
   const isValidRange = (value, min, max) => {
@@ -73,64 +98,89 @@ document.querySelector("#submit").addEventListener("click", () => {
 
   if (selection.value === "rgba") {
     if (!isValidRange(color1.value, 0, 255)) {
-      alert("RED must be between 0 and 255");
+      funcForSet(color1);
+      timerFuncForReset(color1);
+      popup.innerHTML = "Red value must be between 0 and 255.";
       return;
     }
     if (!isValidRange(color2.value, 0, 255)) {
-      alert("GREEN must be between 0 and 255");
+      funcForSet(color2);
+      timerFuncForReset(color2);
+      popup.innerHTML = "Green value must be between 0 and 255.";
       return;
     }
     if (!isValidRange(color3.value, 0, 255)) {
-      alert("BLUE must be between 0 and 255");
+      funcForSet(color3);
+      timerFuncForReset(color3);
+      popup.innerHTML = "Blue value must be between 0 and 255.";
       return;
     }
     if (alpha1.value !== "" && !isValidRange(alpha1.value, 0, 1)) {
-      alert("Alpha must be between 0 and 1");
+      funcForSet(alpha1);
+      timerFuncForReset(alpha1);
+      popup.innerHTML = "Alpha value must be between 0 and 1.";
       return;
     }
     const rgbaColor = `rgba(${color1.value}, ${color2.value}, ${color3.value}, ${alpha1.value || 1})`;
     display(rgbaColor);
+    popup.innerHTML = "RGBA color generated successfully!";
   } else if (selection.value === "hsla") {
     if (!isValidRange(color4.value, 0, 359)) {
-      alert("HUE must be between 0 and 359");
+      funcForSet(color4);
+      timerFuncForReset(color4);
+      popup.innerHTML = "Hue value must be between 0 and 359.";
       return;
     }
     if (!isValidRange(color5.value, 0, 100)) {
-      alert("SATURATION must be between 0 and 100");
+      funcForSet(color5);
+      timerFuncForReset(color5);
+      popup.innerHTML = "Saturation value must be between 0 and 100.";
       return;
     }
     if (!isValidRange(color6.value, 0, 100)) {
-      alert("LIGHTNESS must be between 0 and 100");
+      funcForSet(color6);
+      timerFuncForReset(color6);
+      popup.innerHTML = "Lightness value must be between 0 and 100.";
       return;
     }
     if (alpha2.value !== "" && !isValidRange(alpha2.value, 0, 1)) {
-      alert("Alpha must be between 0 and 1");
+      funcForSet(alpha2);
+      timerFuncForReset(alpha2);
+      popup.innerHTML = "Alpha value must be between 0 and 1.";
       return;
     }
     const hslaColor = `hsla(${color4.value}, ${color5.value}%, ${color6.value}%, ${alpha2.value || 1})`;
     display(hslaColor);
+    popup.innerHTML = "HSLA color generated successfully!";
   } else {
     const character = "abcdef0123456789";
     const hexValue = colorhex.value.trim().toLowerCase();
     if (hexValue.length < 4 || hexValue.length > 7) {
-      alert("HEX code must be 4 to 7 characters long, including #");
+      funcForSet(colorhex);
+      timerFuncForReset(colorhex);
+      popup.innerHTML = "Hex value must be 4-7 characters long (e.g., #123 or #112233).";
       return;
     }
     if (hexValue[0] !== "#") {
-      alert("HEX code must start with #");
+      funcForSet(colorhex);
+      timerFuncForReset(colorhex);
+      popup.innerHTML = "Hex value must start with '#'.";
       return;
     }
     for (let i = 1; i < hexValue.length; i++) {
       if (!character.includes(hexValue[i])) {
-        alert("HEX code contains invalid characters");
+        funcForSet(colorhex);
+        timerFuncForReset(colorhex);
+        popup.innerHTML = "Hex value contains invalid characters. Use 0-9 and a-f.";
         return;
       }
     }
     display(hexValue);
-    events()
-    
+    popup.innerHTML = "Hex color generated successfully!";
+    events();
   }
 });
+
 
 let myhex = colorPicker.color.hexString;
 let myrgb = colorPicker.color.rgbString;
@@ -304,7 +354,6 @@ function events() {
 
 
 // Wheel to create palettes 
-
 colorPicker.on("color:change", ()=>{
   let myhex = colorPicker.color.hexString;
   let myrgb = colorPicker.color.rgbString;
@@ -327,8 +376,6 @@ let child1 = document.querySelectorAll(".whiteness");
 let child2 = document.querySelectorAll(".white");
 let child3 = document.querySelectorAll(".blackbg");
 let child4 = document.querySelectorAll(".blackbd");
-
-let storage = localStorage;
 
 function dark1() {
   document.querySelector("body").classList.remove("bg-[#2b343c]");
